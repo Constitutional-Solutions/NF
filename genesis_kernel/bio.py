@@ -2,18 +2,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-import importlib.util
 from typing import Dict, Iterable, List
 
 from .constants import UniversalConstants
 from .pattern_math import PatternTransformation
-
-if importlib.util.find_spec("networkx"):
-    import networkx as nx
-else:  # pragma: no cover - optional dependency
-from typing import Dict, Iterable, List
-
-from .constants import UniversalConstants
 
 try:
     import networkx as nx
@@ -76,10 +68,6 @@ class BioSystemEngine:
             "redundancy_factor": redundancy,
             "mode": mode,
             "pattern": pattern.describe(),
-        return {
-            "optimized_path": selected,
-            "redundancy_factor": redundancy,
-            "mode": "SURVIVAL" if redundancy > 1 else "GROWTH",
         }
 
     def bio_base_convert(self, number: int) -> str:

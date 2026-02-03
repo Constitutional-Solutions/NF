@@ -2,13 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-import importlib.util
 from typing import Dict, List, Protocol
-
-if importlib.util.find_spec("requests"):
-    import requests
-else:  # pragma: no cover - optional dependency
-from typing import Dict, List
 
 try:
     import requests

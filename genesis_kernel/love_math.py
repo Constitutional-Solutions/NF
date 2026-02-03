@@ -2,13 +2,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-import importlib.util
-import statistics
-from typing import Iterable
-
-if importlib.util.find_spec("numpy"):
-    import numpy as np
-else:  # pragma: no cover - optional dependency
 import statistics
 from typing import Iterable
 
@@ -29,7 +22,6 @@ class LoveMathematics:
     def attract(self, entity1: float, entity2: float, distance: float = 1.0) -> float:
         """Inverse square law modulated by Phi (Love Gravity)."""
         if distance <= 0:
-        if distance == 0:
             return float("inf")
         return (self.constants.PHI * entity1 * entity2) / (distance**2)
 

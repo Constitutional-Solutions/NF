@@ -13,3 +13,12 @@ requests
 fastapi>=0.100
 uvicorn
 pydantic
+fastapi
+maturin
+networkx
+numpy
+pydantic
+requests
+scipy
+sympy
+uvicorn
