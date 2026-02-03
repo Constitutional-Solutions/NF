@@ -50,6 +50,7 @@ from .pattern_math import (
     pattern_distributivity,
     summarize_properties,
 )
+from .nervous_system import NervousSystemIO
 from .quantum import QuantumHarmonicEngine
 
 __all__ = [
@@ -102,4 +103,7 @@ __all__ = [
     "pattern_commutativity",
     "pattern_distributivity",
     "summarize_properties",
+    "QuantumHarmonicEngine",
+    "UniversalConstants",
+    "initiate_genesis",
 ]

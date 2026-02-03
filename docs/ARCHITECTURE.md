@@ -13,6 +13,9 @@ primitives (routing, quantization, synthesis). The intent is to express a layere
 6. **Nervous System**: hardware I/O bridge for cluster dispatch and sensing.
 7. **Consciousness**: bicameral synthesis and hardware handshake.
 8. **Awakening**: a runtime orchestration and diagnostic story.
+5. **Nervous System**: hardware I/O bridge for cluster dispatch and sensing.
+6. **Consciousness**: bicameral synthesis and hardware handshake.
+7. **Awakening**: a runtime orchestration and diagnostic story.
 
 ## Architectural Updates
 

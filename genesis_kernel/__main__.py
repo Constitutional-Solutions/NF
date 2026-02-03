@@ -1,4 +1,5 @@
 """Module entrypoint for the Genesis Kernel runtime."""
+"""Module entrypoint for the Genesis Kernel."""
 from __future__ import annotations
 
 from .app import initiate_genesis

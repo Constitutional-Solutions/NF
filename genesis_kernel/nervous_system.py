@@ -8,6 +8,11 @@ from typing import Dict, List, Protocol
 if importlib.util.find_spec("requests"):
     import requests
 else:  # pragma: no cover - optional dependency
+from typing import Dict, List
+
+try:
+    import requests
+except ModuleNotFoundError:  # pragma: no cover - optional dependency
     requests = None
 
 
@@ -45,6 +50,7 @@ class NervousSystemIO:
             #     f"http://{target_node}:8000/dream",
             #     json=task_data,
             #     timeout=self.dispatch_timeout_s,
+            #     timeout=1,
             # )
             return {"status": "SENT", "node": target_node}
         except Exception as exc:  # pragma: no cover - network dependent
@@ -64,6 +70,7 @@ class NervousSystemIO:
                 #     f"http://{eye_ip}:5000/look",
                 #     timeout=self.vision_timeout_s,
                 # )
+                # response = requests.get(f"http://{eye_ip}:5000/look", timeout=0.5)
                 results.append({"eye": eye_ip, "status": "CAPTURED"})
             except Exception:  # pragma: no cover - network dependent
                 results.append({"eye": eye_ip, "status": "UNREACHABLE"})

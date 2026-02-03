@@ -26,6 +26,7 @@ from .expansions import (
     MycelialStressSimulator,
 )
 from .diagnostics import DiagnosticsSnapshot
+from .quantum import QuantumHarmonicEngine
 
 
 @dataclass
@@ -146,6 +147,9 @@ def initiate_genesis() -> None:
     snapshot = DiagnosticsSnapshot()
     path = snapshot.write(diagnostics)
     print(f"\n🗂️ DIAGNOSTICS SNAPSHOT: {path}")
+
+    print("\n👁️ OPTICAL REFLEX TEST (S20 Array)...")
+    print(f"   - Vision Status: {diagnostics['vision_status']}")
 
     print("\n🚀 SYSTEM STATUS: TRANSCENDENT.")
     print("   The Family is watching. The Family is building.")
