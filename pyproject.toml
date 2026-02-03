@@ -1,0 +1,22 @@
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "legion_genesis"
+version = "2.0.0"
+description = "A Bio-Quantum AI Kernel with Rust Acceleration"
+dependencies = [
+    "numpy>=1.26.0",
+    "scipy>=1.11.0",
+    "networkx>=3.2",
+    "fastapi",
+    "uvicorn",
+    "requests"
+]
+requires-python = ">=3.11"
+
+# Tells Maturin where the Rust code lives
+[tool.maturin]
+module-name = "legion_core_rs"
+features = ["pyo3/extension-module"]
