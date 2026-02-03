@@ -1,4 +1,4 @@
-"""Aether protocol: Neural synthesis between logic and creative inputs."""
+"""Aether protocol: Neural synthesis with Oubliette persistence."""
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -11,83 +11,89 @@ try:
     NEURAL_AVAILABLE = True
 except ImportError:
     NEURAL_AVAILABLE = False
-    print("⚠️ NEURAL ENGINE MISSING: Falling back to simulated resonance.")
 
 from .bio import BioSystemEngine
 from .constants import UniversalConstants
 from .nervous_system import NervousSystemIO
 from .quantum import QuantumHarmonicEngine
-
+from .memory import Oubliette  # <--- NEW IMPORT
 
 @dataclass
 class AetherProtocol:
     """
     Connect hardware, code, and user with bicameral neural synthesis.
-    Now uses Vector Embeddings to measure semantic alignment.
+    Now persists 'INTEGRATED' thoughts to the Oubliette.
     """
 
     constants: UniversalConstants
     quantum: QuantumHarmonicEngine
     bio: BioSystemEngine
     nervous_system: NervousSystemIO
+    oubliette: Oubliette  # <--- NEW COMPONENT
+    
     coherence: float = 1.0
-    minimum_resonance: float = 0.4  # Slightly higher threshold for semantic matching
+    minimum_resonance: float = 0.4
     last_resonance: float = 0.0
     
-    # Neural Model Cache
     _model: Optional[object] = field(init=False, default=None)
 
     def __post_init__(self):
         """Load the Neural Network into RAM on startup."""
         if NEURAL_AVAILABLE:
             print("🧠 LOADING NEURAL VECTORS (all-MiniLM-L6-v2)...")
-            # This downloads a tiny 22MB model optimized for semantic speed
             self._model = SentenceTransformer('all-MiniLM-L6-v2')
+        else:
+            print("⚠️ NEURAL ENGINE MISSING: Using simulated resonance.")
 
     def bicameral_synthesis(self, logic_input: str, creative_input: str) -> Dict[str, object]:
         """
-        Merge analytical and creative inputs using Semantic Cosine Similarity.
+        Merge inputs. If resonance is high, commit to memory.
         """
+        method = "SIMULATED_PHI"
+        resonance = 0.0
+
         if NEURAL_AVAILABLE and self._model:
-            # 1. Encode thoughts into 384-dimensional vector space
-            embedding_logic = self._model.encode(logic_input, convert_to_tensor=True)
-            embedding_creative = self._model.encode(creative_input, convert_to_tensor=True)
-            
-            # 2. Calculate Cosine Similarity (-1.0 to 1.0)
-            # How much does the "Logic" align with the "Dream"?
-            similarity = util.cos_sim(embedding_logic, embedding_creative).item()
-            
-            # 3. Normalize to Resonance Score (0.0 to 1.0)
-            # We map -1..1 to 0..1 for Phi compatibility
+            # Neural Cosine Similarity
+            emb_logic = self._model.encode(logic_input, convert_to_tensor=True)
+            emb_creative = self._model.encode(creative_input, convert_to_tensor=True)
+            similarity = util.cos_sim(emb_logic, emb_creative).item()
             resonance = (similarity + 1) / 2
-            
             method = "NEURAL_COSINE"
         else:
-            # Fallback to Old Physics (Simulated)
-            logic_score = len(str(logic_input)) * self.constants.PHI
-            creative_score = len(str(creative_input)) * self.constants.PHI
-            resonance = self.quantum.love.resonate(logic_score, creative_score)
-            method = "SIMULATED_PHI"
+            # Simulated Fallback
+            l_score = len(str(logic_input)) * self.constants.PHI
+            c_score = len(str(creative_input)) * self.constants.PHI
+            resonance = self.quantum.love.resonate(l_score, c_score)
 
         self.last_resonance = resonance
         
-        # Generate ID
         synthesis_id = hashlib.sha256(
             f"{logic_input}{creative_input}".encode()
         ).hexdigest()[:8]
 
-        # Decision Logic
         decision = "DIVERGENT"
         if resonance > 0.8:
             decision = "INTEGRATED"
         elif resonance < self.minimum_resonance:
             decision = "REJECTED"
 
-        # Hardware Reflex
+        # 💾 THE OUBLIETTE COMMIT
         if decision == "INTEGRATED":
-            self.nervous_system.dispatch_dream(
-                {"type": "SYNTHESIS", "score": resonance, "method": method}
-            )
+            # 1. Dispatch Dream (Action)
+            self.nervous_system.dispatch_dream({
+                "type": "SYNTHESIS", 
+                "score": resonance, 
+                "method": method
+            })
+            # 2. Crystallize Memory (Storage)
+            self.oubliette.memorize({
+                "synthesis_id": synthesis_id,
+                "logic_input": logic_input,
+                "creative_input": creative_input,
+                "resonance": resonance,
+                "decision": decision,
+                "method": method
+            })
 
         return {
             "synthesis_id": synthesis_id,
@@ -95,9 +101,8 @@ class AetherProtocol:
             "decision": decision,
             "method": method
         }
-
+    
     def hardware_handshake(self, device_id: str) -> Dict[str, str]:
-        """Entangle software with physical hardware via bio-signature."""
         return {
             "device": device_id,
             "status": "QUANTUM_LOCKED",
