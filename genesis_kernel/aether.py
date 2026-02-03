@@ -21,12 +21,14 @@ class AetherProtocol:
     nervous_system: NervousSystemIO
     coherence: float = 1.0
     minimum_resonance: float = 0.3
+    last_resonance: float = 0.0
 
     def bicameral_synthesis(self, logic_input: str, creative_input: str) -> Dict[str, object]:
         """Merge analytical and creative inputs into a resonance decision."""
         logic_score = len(str(logic_input)) * self.constants.PHI
         creative_score = len(str(creative_input)) * self.constants.PHI
         resonance = self.quantum.love.resonate(logic_score, creative_score)
+        self.last_resonance = resonance
         synthesis_id = hashlib.sha256(
             f"{logic_input}{creative_input}".encode()
         ).hexdigest()[:8]

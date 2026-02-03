@@ -2,6 +2,15 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import importlib.util
+from typing import Dict, Iterable, List
+
+from .constants import UniversalConstants
+from .pattern_math import PatternTransformation
+
+if importlib.util.find_spec("networkx"):
+    import networkx as nx
+else:  # pragma: no cover - optional dependency
 from typing import Dict, Iterable, List
 
 from .constants import UniversalConstants
@@ -29,6 +38,19 @@ class BioSystemEngine:
         Optimize network paths like slime mold.
         High stress = redundant paths. Low stress = efficient paths.
         """
+        stress_level = max(0.0, min(1.0, stress_level))
+        redundancy = 1 if stress_level < 0.5 else 3
+        node_list = list(nodes)
+        if not node_list:
+            return {
+                "optimized_path": [],
+                "redundancy_factor": redundancy,
+                "mode": "IDLE",
+                "pattern": PatternTransformation(
+                    name="mycelial-routing-idle",
+                    steps=["receive", "idle"],
+                ).describe(),
+            }
         redundancy = 1 if stress_level < 0.5 else 3
         node_list = list(nodes)
         if nx is not None:
@@ -39,6 +61,21 @@ class BioSystemEngine:
         selected: List[int] = [
             int(node["id"]) for node in sorted_nodes[: max_nodes * redundancy]
         ]
+        mode = "SURVIVAL" if redundancy > 1 else "GROWTH"
+        pattern = PatternTransformation(
+            name=f"mycelial-routing-{mode.lower()}",
+            steps=[
+                "receive",
+                "rank-by-value",
+                "select-top",
+                "emit-path",
+            ],
+        )
+        return {
+            "optimized_path": selected,
+            "redundancy_factor": redundancy,
+            "mode": mode,
+            "pattern": pattern.describe(),
         return {
             "optimized_path": selected,
             "redundancy_factor": redundancy,

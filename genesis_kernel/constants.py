@@ -2,6 +2,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+import importlib.util
+import math
+from typing import List
+
+if importlib.util.find_spec("numpy"):
+    import numpy as np
+else:  # pragma: no cover - optional dependency
+    np = None
 from typing import List
 
 try:

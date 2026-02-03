@@ -24,6 +24,10 @@ class QuantumHarmonicEngine:
         E_n = h_bar * omega * (n + 1/2)
         Calculates energy of a quantum thought state.
         """
+        if n < 0:
+            raise ValueError("Quantum level must be non-negative.")
+        if omega <= 0:
+            raise ValueError("Omega must be positive.")
         return self.constants.HBAR * omega * (n + 0.5)
 
     def phi_quantization(self) -> Dict[str, int]:
