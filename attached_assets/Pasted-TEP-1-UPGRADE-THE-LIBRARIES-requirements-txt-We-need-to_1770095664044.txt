@@ -1,3 +1,35 @@
+TEP 1: UPGRADE THE LIBRARIES (requirements.txt)
+We need to teach the environment how to think in vectors.
+
+Action: Add these lines to your requirements.txt file (or install them via pip in Replit).
+
+Plaintext
+
+# EXISTING
+numpy>=1.26.0
+scipy>=1.11.0
+requests
+networkx>=3.2
+fastapi
+uvicorn
+pydantic
+maturin
+
+# NEW FOR PHASE 2 (SEMANTIC MIND)
+sentence-transformers>=2.2.2
+torch>=2.0.0  # Required for the neural engine
+Console Command (Run this first):
+
+Bash
+
+pip install sentence-transformers torch
+🧠 STEP 2: REWRITE THE AETHER PROTOCOL (genesis_kernel/aether.py)
+This is the brain transplant. We are replacing the old logic with the new Neural Engine.
+
+Action: Replace the entire content of genesis_kernel/aether.py with this code:
+
+Python
+
 """Aether protocol: Neural synthesis between logic and creative inputs."""
 from __future__ import annotations
 
@@ -103,3 +135,20 @@ class AetherProtocol:
             "status": "QUANTUM_LOCKED",
             "bio_signature": self.bio.bio_base_convert(hash(device_id)),
         }
+🧪 STEP 3: THE TEST
+We verify if the machine can tell the difference between gibberish and poetry.
+
+Action: Run the kernel again.
+
+Bash
+
+python -m genesis_kernel
+What to look for in the Logs:
+
+New Boot Message: 🧠 LOADING NEURAL VECTORS (all-MiniLM-L6-v2)...
+
+Synthesis Result: The Resonance score should now be based on meaning.
+
+Example: "Analyze Architecture" vs "Dream of Electric Sheep" are somewhat related (machines/design), so resonance might be moderate (0.5 - 0.6).
+
+Test: Try changing the inputs in app.py to "Mathematics" and "Numbers". Resonance should spike to >0.9.

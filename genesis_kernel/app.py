@@ -60,8 +60,8 @@ class GenesisKernel:
             stress_level=0.8,
         )
         thought = self.aether.bicameral_synthesis(
-            "Analyze Architecture",
-            "Dream of electric sheep",
+            "Mathematics",
+            "Numbers",
         )
         glyph = self.quantum.phi_quantization()
         pattern = build_quadratic_pattern()

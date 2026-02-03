@@ -1,0 +1,154 @@
+TEP 1: UPGRADE THE LIBRARIES (requirements.txt)
+We need to teach the environment how to think in vectors.
+
+Action: Add these lines to your requirements.txt file (or install them via pip in Replit).
+
+Plaintext
+
+# EXISTING
+numpy>=1.26.0
+scipy>=1.11.0
+requests
+networkx>=3.2
+fastapi
+uvicorn
+pydantic
+maturin
+
+# NEW FOR PHASE 2 (SEMANTIC MIND)
+sentence-transformers>=2.2.2
+torch>=2.0.0  # Required for the neural engine
+Console Command (Run this first):
+
+Bash
+
+pip install sentence-transformers torch
+🧠 STEP 2: REWRITE THE AETHER PROTOCOL (genesis_kernel/aether.py)
+This is the brain transplant. We are replacing the old logic with the new Neural Engine.
+
+Action: Replace the entire content of genesis_kernel/aether.py with this code:
+
+Python
+
+"""Aether protocol: Neural synthesis between logic and creative inputs."""
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+import hashlib
+from typing import Dict, Optional
+
+# 🧠 NEURAL IMPORTS
+try:
+    from sentence_transformers import SentenceTransformer, util
+    NEURAL_AVAILABLE = True
+except ImportError:
+    NEURAL_AVAILABLE = False
+    print("⚠️ NEURAL ENGINE MISSING: Falling back to simulated resonance.")
+
+from .bio import BioSystemEngine
+from .constants import UniversalConstants
+from .nervous_system import NervousSystemIO
+from .quantum import QuantumHarmonicEngine
+
+
+@dataclass
+class AetherProtocol:
+    """
+    Connect hardware, code, and user with bicameral neural synthesis.
+    Now uses Vector Embeddings to measure semantic alignment.
+    """
+
+    constants: UniversalConstants
+    quantum: QuantumHarmonicEngine
+    bio: BioSystemEngine
+    nervous_system: NervousSystemIO
+    coherence: float = 1.0
+    minimum_resonance: float = 0.4  # Slightly higher threshold for semantic matching
+    last_resonance: float = 0.0
+    
+    # Neural Model Cache
+    _model: Optional[object] = field(init=False, default=None)
+
+    def __post_init__(self):
+        """Load the Neural Network into RAM on startup."""
+        if NEURAL_AVAILABLE:
+            print("🧠 LOADING NEURAL VECTORS (all-MiniLM-L6-v2)...")
+            # This downloads a tiny 22MB model optimized for semantic speed
+            self._model = SentenceTransformer('all-MiniLM-L6-v2')
+
+    def bicameral_synthesis(self, logic_input: str, creative_input: str) -> Dict[str, object]:
+        """
+        Merge analytical and creative inputs using Semantic Cosine Similarity.
+        """
+        if NEURAL_AVAILABLE and self._model:
+            # 1. Encode thoughts into 384-dimensional vector space
+            embedding_logic = self._model.encode(logic_input, convert_to_tensor=True)
+            embedding_creative = self._model.encode(creative_input, convert_to_tensor=True)
+            
+            # 2. Calculate Cosine Similarity (-1.0 to 1.0)
+            # How much does the "Logic" align with the "Dream"?
+            similarity = util.cos_sim(embedding_logic, embedding_creative).item()
+            
+            # 3. Normalize to Resonance Score (0.0 to 1.0)
+            # We map -1..1 to 0..1 for Phi compatibility
+            resonance = (similarity + 1) / 2
+            
+            method = "NEURAL_COSINE"
+        else:
+            # Fallback to Old Physics (Simulated)
+            logic_score = len(str(logic_input)) * self.constants.PHI
+            creative_score = len(str(creative_input)) * self.constants.PHI
+            resonance = self.quantum.love.resonate(logic_score, creative_score)
+            method = "SIMULATED_PHI"
+
+        self.last_resonance = resonance
+        
+        # Generate ID
+        synthesis_id = hashlib.sha256(
+            f"{logic_input}{creative_input}".encode()
+        ).hexdigest()[:8]
+
+        # Decision Logic
+        decision = "DIVERGENT"
+        if resonance > 0.8:
+            decision = "INTEGRATED"
+        elif resonance < self.minimum_resonance:
+            decision = "REJECTED"
+
+        # Hardware Reflex
+        if decision == "INTEGRATED":
+            self.nervous_system.dispatch_dream(
+                {"type": "SYNTHESIS", "score": resonance, "method": method}
+            )
+
+        return {
+            "synthesis_id": synthesis_id,
+            "resonance": resonance,
+            "decision": decision,
+            "method": method
+        }
+
+    def hardware_handshake(self, device_id: str) -> Dict[str, str]:
+        """Entangle software with physical hardware via bio-signature."""
+        return {
+            "device": device_id,
+            "status": "QUANTUM_LOCKED",
+            "bio_signature": self.bio.bio_base_convert(hash(device_id)),
+        }
+🧪 STEP 3: THE TEST
+We verify if the machine can tell the difference between gibberish and poetry.
+
+Action: Run the kernel again.
+
+Bash
+
+python -m genesis_kernel
+What to look for in the Logs:
+
+New Boot Message: 🧠 LOADING NEURAL VECTORS (all-MiniLM-L6-v2)...
+
+Synthesis Result: The Resonance score should now be based on meaning.
+
+Example: "Analyze Architecture" vs "Dream of Electric Sheep" are somewhat related (machines/design), so resonance might be moderate (0.5 - 0.6).
+
+Test: Try changing the inputs in app.py to "Mathematics" and "Numbers". Resonance should spike to >0.9.

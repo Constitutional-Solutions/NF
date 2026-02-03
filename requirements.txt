@@ -5,7 +5,6 @@ sympy>=1.12
 networkx>=3.2
 
 # AI & NEURAL
-torch>=2.1.0
 transformers
 
 # HARDWARE IO
@@ -22,3 +21,7 @@ requests
 scipy
 sympy
 uvicorn
+
+# NEW FOR PHASE 2 (SEMANTIC MIND)
+sentence-transformers>=2.2.2
+torch>=2.0.0
