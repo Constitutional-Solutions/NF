@@ -16,3 +16,9 @@ This document records the Rust bridge implementation for accelerating hot paths 
 - `legion_core_rs` crate with PyO3 bindings.
 - Build instructions for macOS/Linux and RISC-V.
 - CI job to publish wheels and verify output parity with Python.
+
+## Local Build (Example)
+```bash
+cd legion_core_rs
+maturin develop
+```

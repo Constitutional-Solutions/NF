@@ -13,6 +13,7 @@ implementation priority (P0 highest).
 - [x] Add CI test forcing Rust bridge absence to validate Python fallback.
 - [x] Add performance benchmark for Rust vs Python phi_quantization.
 - [x] Define legion-light vs legion-heavy container build profiles.
+- [x] Scaffold legion_core_rs crate with PyO3 bindings.
 - [ ] Add diagnostics regression snapshot tests for rust_bridge + sovereign_stack payloads.
 - [ ] Add orchestration hooks for sovereign stack readiness checks (firmware/kernel/OS).
 
