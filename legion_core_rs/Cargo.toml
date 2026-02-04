@@ -1,0 +1,15 @@
+[package]
+name = "legion_core_rs"
+version = "0.1.0"
+edition = "2021"
+authors = ["The Legion Family <guardian@legion.net>"]
+description = "High-performance Rust acceleration for the Genesis Kernel."
+
+[lib]
+name = "legion_core_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.20.0", features = ["extension-module"] }
+rayon = "1.8"
+serde = { version = "1.0", features = ["derive"] }

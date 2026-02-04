@@ -1,0 +1,17 @@
+# CORE MATH & PHYSICS
+numpy>=1.26.0
+scipy>=1.11.0
+sympy>=1.12
+networkx>=3.2
+
+# AI & NEURAL
+torch>=2.1.0
+transformers
+
+# HARDWARE IO
+requests
+fastapi>=0.100
+uvicorn
+pydantic
+# Build System
+maturin>=1.4.0

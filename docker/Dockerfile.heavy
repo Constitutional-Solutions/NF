@@ -1,0 +1,19 @@
+FROM python:3.11
+
+WORKDIR /app
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+# Placeholder for Rust toolchain and GPU stack installs.
+
+COPY genesis_kernel /app/genesis_kernel
+COPY scripts /app/scripts
+
+ENV PYTHONPATH=/app
+
+CMD ["python", "-m", "genesis_kernel"]
