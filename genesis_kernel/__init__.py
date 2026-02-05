@@ -6,6 +6,7 @@ from .bio import BioSystemEngine
 from .constants import UniversalConstants
 from .love_math import LoveMathematics
 from .nervous_system import NervousSystemIO, NervousSystemDriver
+from .memory import MemoryEngram, Oubliette
 from .spiral_physics import SpiralLaws, SpiralState
 from .expansions import (
     Base144kSolver,
@@ -63,6 +64,8 @@ __all__ = [
     "LoveMathematics",
     "NervousSystemIO",
     "NervousSystemDriver",
+    "MemoryEngram",
+    "Oubliette",
     "SpiralLaws",
     "SpiralState",
     "BioCompassionWatchdog",

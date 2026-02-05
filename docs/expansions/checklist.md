@@ -16,6 +16,9 @@ implementation priority (P0 highest).
 - [x] Scaffold legion_core_rs crate with PyO3 bindings.
 - [ ] Add diagnostics regression snapshot tests for rust_bridge + sovereign_stack payloads.
 - [ ] Add orchestration hooks for sovereign stack readiness checks (firmware/kernel/OS).
+- [x] Add semantic mind dependencies (sentence-transformers + torch).
+- [x] Add Oubliette memory module for persistent recall.
+- [x] Add infinite interactive loop for continuous resonance checks.
 
 ## Compatibility Expansions (Sovereign Stack)
 - [ ] RISC-V cross-compile toolchain bridge (Rust + Python packaging).
