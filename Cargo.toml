@@ -1,24 +1,14 @@
 [package]
-name = "legion_core_rs"
+name = "legion_core"
 version = "0.1.0"
 edition = "2021"
-authors = ["The Legion Family <guardian@legion.net>"]
-description = "High-performance Rust acceleration for the Genesis Kernel."
 
-# 1. THE LIBRARY TYPE
-# "cdylib" (C-Dynamic Library) is required for Python to load it as a module (.so/.pyd).
+# 🛑 THIS IS THE MISSING KEY 🛑
 [lib]
-name = "legion_core_rs"
+name = "legion_core"
 crate-type = ["cdylib"]
 
-# 2. DEPENDENCIES
 [dependencies]
-# PyO3: The bridge between Rust and Python. 
-# "extension-module" feature is crucial—it lets Python import this library.
-pyo3 = { version = "0.20.0", features = ["extension-module"] }
-
-# Rayon: For parallel processing (Multithreading the Quantum Engine later)
-rayon = "1.8" 
-
-# Serde: For fast JSON serialization (if we need to pass complex objects)
-serde = { version = "1.0", features = ["derive"] }
+# We need the "extension-module" feature to tell Python how to read this.
+pyo3 = { version = "0.23", features = ["extension-module"] }
+ndarray = "0.16"
